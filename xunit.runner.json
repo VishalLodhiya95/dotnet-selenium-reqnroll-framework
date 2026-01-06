@@ -1,0 +1,31 @@
+{
+  "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
+  
+  // ============================================================
+  // PARALLEL EXECUTION SETTINGS
+  // ============================================================
+  
+  // Set to true to enable parallel execution, false to disable
+  "parallelizeTestCollections": true,
+  
+  // Maximum number of parallel threads
+  // Options:
+  //   - "default" = number of CPU cores
+  //   - "unlimited" = no limit
+  //   - A specific number like 2, 4, 8, etc.
+  "maxParallelThreads": 4,
+  
+  // ============================================================
+  // OTHER SETTINGS
+  // ============================================================
+  
+  // Show diagnostic messages
+  "diagnosticMessages": false,
+  
+  // Stop on first failure
+  "stopOnFail": false,
+  
+  // Method display format
+  "methodDisplay": "classAndMethod"
+}
+

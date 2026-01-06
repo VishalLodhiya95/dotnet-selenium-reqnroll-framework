@@ -1,0 +1,38 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet
+packages/
+*.nupkg
+.nuget/
+
+# Rider
+.idea/
+*.sln.iml
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.log
+Screenshots/
+TestResults/Reports/
+
+
