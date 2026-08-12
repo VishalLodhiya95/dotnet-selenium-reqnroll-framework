@@ -1,0 +1,57 @@
+name: C# Reqnroll CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Set up headless Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run xUnit + Reqnroll tests
+        run: dotnet test --no-build --configuration Release --logger "trx;LogFileName=test-results.trx" --results-directory ./TestResults
+        env:
+          HEADLESS: 'true'
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults/
+
+      - name: Upload Reqnroll/LivingDoc report (if generated)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: living-doc-report
+          path: '**/LivingDoc.html'
+          if-no-files-found: ignore
+
+      - name: Publish test summary
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: Reqnroll Test Results
+          path: TestResults/*.trx
+          reporter: dotnet-trx
